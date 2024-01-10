@@ -17,6 +17,16 @@ void linklistTraversal(struct node *head){
     }
     printf("\n");
 }
+//linklist traversal in reverse order
+void linklistTraversalReverse(struct node *head){
+    if (head == NULL) {
+        return;
+    }
+    // Recursively traverse the rest of the list
+    linklistTraversalReverse(head->next);
+    // Print the current node's data
+    printf("%d ", head->data);
+}
 //insert operation
 //insert before head
 struct node *insertBefore(struct node *head, int data){
@@ -170,8 +180,10 @@ int main()
 {
     printf("enter the data of head node\n");
     struct node *head = createNode();
-    //linklist tra   
+    //linklist traversal   
     linklistTraversal(head);
+    //linklist reversal reverse
+    linklistTraversalReverse(head);
 
     //insertion operation 
     //insert before
@@ -250,11 +262,6 @@ int main()
     }else{
         printf("item found at %dth index position in binary search\n", b_res);
     }
-    
-    
-
-
-
 
     return 0;
 }
