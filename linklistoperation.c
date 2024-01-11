@@ -169,6 +169,7 @@ void deleteDuplicate(struct node *head){
         {
             struct node *ptr = q;
             p->next = q->next;
+            q = q->next;
             free(ptr);
         }else{
             p = p->next;
@@ -201,6 +202,7 @@ int main()
     linklistTraversal(head);
     //linklist reversal reverse
     linklistTraversalReverse(head);
+    printf("\n");
 
     //delete duplicate node
     printf("delete duplicate node\n");
