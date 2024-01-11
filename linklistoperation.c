@@ -68,22 +68,6 @@ void insertInbetweenNodes(struct node *prev_node, int data){
     ptr->next = prev_node->next;
     prev_node->next = ptr;
 }
-
-//create node
-struct node *createNode(){
-    int data;
-    printf("enter data\n");
-    scanf("%d", &data);
-    if (data == -1)
-    {
-        return NULL;
-    }
-    
-    struct node *ptr = (struct node *) malloc(sizeof(struct node));
-    ptr->data = data;
-    ptr->next = createNode();
-    return ptr;
-}
 //delete operations
 //delete first node
 struct node *deleteFirstNode(struct node *head){
@@ -174,7 +158,40 @@ int binarySearch(struct node *head, int item){
     }
     return -1;
 }
+//delete duplicate node from a linklist
+// 1 2 2 3 4 -> 1 2 3 4 
+void deleteDuplicate(struct node *head){
+    struct node *p = head;
+    struct node *q = head->next;
+    while (p!=NULL && q!=NULL)
+    {
+        if ( p->data == q->data)
+        {
+            struct node *ptr = q;
+            p->next = q->next;
+            free(ptr);
+        }else{
+            p = p->next;
+            q = q->next;
+        }
+    }
+}
 
+//create node
+struct node *createNode(){
+    int data;
+    printf("enter data\n");
+    scanf("%d", &data);
+    if (data == -1)
+    {
+        return NULL;
+    }
+    
+    struct node *ptr = (struct node *) malloc(sizeof(struct node));
+    ptr->data = data;
+    ptr->next = createNode();
+    return ptr;
+}
 
 int main()
 {
@@ -184,6 +201,11 @@ int main()
     linklistTraversal(head);
     //linklist reversal reverse
     linklistTraversalReverse(head);
+
+    //delete duplicate node
+    printf("delete duplicate node\n");
+    deleteDuplicate(head);
+    linklistTraversal(head);
 
     //insertion operation 
     //insert before
